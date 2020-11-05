@@ -1,17 +1,47 @@
 import pyautogui
+import keyboard
 
 # Get the size of the primary monitor.
 screenWidth, screenHeight = pyautogui.size()
+currentMouseX, currentMouseY = pyautogui.position()
 
+print('Press Ctrl-C or Ctrl-q to quit.')
+try:
+    delta = 100
+    midpointX = screenWidth/2
+    midpointY = screenHeight/2
+    while keyboard.is_pressed('ctrl+q') == False:
+        pyautogui.moveTo(midpointX+delta, midpointY-delta,
+                         duration=0.5, tween=pyautogui.easeInOutQuad)
+        pyautogui.moveTo(midpointX+delta, midpointY+delta,
+                         duration=0.5, tween=pyautogui.easeInOutQuad)
+        pyautogui.moveTo(midpointX-delta, midpointY+delta,
+                         duration=0.5, tween=pyautogui.easeInOutQuad)
+        pyautogui.moveTo(midpointX-delta, midpointY-delta,
+                         duration=0.5, tween=pyautogui.easeInOutQuad)
+except KeyboardInterrupt:
+    print('\n')
 
-distance = 200
-while distance > 0:
-    pyautogui.drag(distance, 0, duration=0.5)   # move right
-    distance -= 5
-    pyautogui.drag(0, distance, duration=0.5)   # move down
-    pyautogui.drag(-distance, 0, duration=0.5)  # move left
-    distance -= 5
-    pyautogui.drag(0, -distance, duration=0.5)  # move up
+# print('Press Ctrl-C to quit.')
+# try:
+#     while True:
+#         x, y = pyautogui.position()
+#         positionStr = 'X: ' + str(x).rjust(4) + ' Y: ' + str(y).rjust(4)
+#         print(positionStr, end='')
+#         print('\b' * len(positionStr), end='', flush=True)
+# except KeyboardInterrupt:
+#     print('\n')
+
+# Circle
+# distance = 50
+# while distance > 0:
+#     pyautogui.drag(distance, 0, duration=0.5)   # move right
+#     distance -= 5
+#     pyautogui.drag(0, distance, duration=0.5)   # move down
+#     pyautogui.drag(-distance, 0, duration=0.5)  # move left
+#     distance -= 5
+#     pyautogui.drag(0, -distance, duration=0.5)  # move up
+
 
 # Get the XY position of the mouse.
 # currentMouseX, currentMouseY = pyautogui.position()
